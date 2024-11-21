@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  web:
+    build: web
+    image: sroman91/flask-app:1.0
+    env_file:
+      - tripmeal.env
+    networks:
+      - backend
+    ports:
+      - 10000:5000
+  db:
+    build: db
+    image: sroman91/db-app:1.0
+    env_file:
+      - tripmeal.env
+    networks:
+      - backend
+    volumes:
+      - app-vol:/var/lib/mysql
+
+networks:
+  backend:
+
+volumes:
+  app-vol:
